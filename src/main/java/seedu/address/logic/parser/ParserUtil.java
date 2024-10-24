@@ -12,8 +12,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Client;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -102,12 +105,41 @@ public class ParserUtil {
      * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
+        if (tag == null) {
+            return null;
+        }
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String wedding} into a {@code Wedding}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code wedding} is invalid.
+     */
+    public static Wedding parseWedding(String wedding) throws ParseException {
+        // SHERNICE HELP
+        if (wedding == null) {
+            return null;
+        }
+        Person temporaryPerson = new Person(
+                new Name("Temporary"), new Phone("11111111"),
+                new Email("temporary@gmail.com"),
+                new Address("Temporary Address"),
+                null,
+                null);
+        Wedding temporaryWedding = new Wedding(
+                new Name("Temporary Wedding"), new Client(temporaryPerson), null, null);
+        return temporaryWedding;
+        //String trimmedWedding = wedding.trim();
+        //if (!Wedding.isValidWeddingName(trimmedWedding)) {
+        //    throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        //}
+        //return new Tag(trimmedWedding);
     }
 
     /**
