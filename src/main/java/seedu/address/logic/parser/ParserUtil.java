@@ -16,7 +16,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.wedding.Client;
-
 import seedu.address.model.wedding.Date;
 import seedu.address.model.wedding.Venue;
 
