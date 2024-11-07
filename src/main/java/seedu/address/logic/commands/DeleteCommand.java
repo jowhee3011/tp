@@ -82,9 +82,9 @@ public class DeleteCommand extends Command {
         }
 
         if (isDeleteWedding) {
-            Predicate<Person> PREDICATE_PERSON_ONLY = p -> p.equals(personToDelete);
-            Predicate<Wedding> PREDICATE_PERSON_WEDDINGS = w ->
-                    (personToDelete.getOwnWedding() != null && personToDelete.getOwnWedding().equals(w))
+            Predicate<Person> personOnlyPredicate = p -> p.equals(personToDelete);
+            Predicate<Wedding> personWeddingsPredicate = w -> (
+                    personToDelete.getOwnWedding() != null && personToDelete.getOwnWedding().equals(w))
                             || personToDelete.getWeddingJobs().contains(w);
 
             checkValidWeddingIndices(model);
@@ -92,8 +92,8 @@ public class DeleteCommand extends Command {
             checkPersonIsAssignedWeddings(personToDelete, model);
             // delete those weddings
             removeWeddingJobs(personToDelete, model);
-            model.updateFilteredPersonList(PREDICATE_PERSON_ONLY);
-            model.updateFilteredWeddingList(PREDICATE_PERSON_WEDDINGS);
+            model.updateFilteredPersonList(personOnlyPredicate);
+            model.updateFilteredWeddingList(personWeddingsPredicate);
             return new CommandResult(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
                     Messages.format(personToDelete)));
         } else {

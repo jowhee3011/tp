@@ -62,6 +62,10 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(p -> p.equals(personToDelete));
+        expectedModel.updateFilteredWeddingList(w -> (
+                personToDelete.getOwnWedding() != null && personToDelete.getOwnWedding().equals(w))
+                || personToDelete.getWeddingJobs().contains(w));
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -106,6 +110,11 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        expectedModel.updateFilteredPersonList(p -> p.equals(personToDelete));
+        expectedModel.updateFilteredWeddingList(w -> (
+                personToDelete.getOwnWedding() != null && personToDelete.getOwnWedding().equals(w))
+                || personToDelete.getWeddingJobs().contains(w));
         expectedModel.deletePerson(personToDelete);
         // Make sure expectedModel has same filter state
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -145,6 +154,11 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        expectedModel.updateFilteredPersonList(p -> p.equals(personToDelete));
+        expectedModel.updateFilteredWeddingList(w -> (
+                personToDelete.getOwnWedding() != null && personToDelete.getOwnWedding().equals(w))
+                || personToDelete.getWeddingJobs().contains(w));
         expectedModel.deletePerson(personToDelete);
         // Make sure expectedModel has the same filter state
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -201,7 +215,12 @@ public class DeleteCommandTest {
         expectedPerson.removeWeddingJob(elleWeddingCopy);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(p -> p.equals(personToDelete));
+        expectedModel.updateFilteredWeddingList(w -> (
+                personToDelete.getOwnWedding() != null && personToDelete.getOwnWedding().equals(w))
+                || personToDelete.getWeddingJobs().contains(w));
         expectedModel.setPerson(personToDelete, expectedPerson);
+
         CommandResult result = deleteCommand.execute(model);
         assertEquals(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
                         Messages.format(expectedPerson),

@@ -169,6 +169,12 @@ public class AssignCommandTest {
         expectedPerson.setWeddingJobs(Set.of(assignedWedding));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        expectedModel.updateFilteredPersonList(p -> p.equals(expectedPerson));
+        expectedModel.updateFilteredWeddingList(w -> (
+                expectedPerson.getOwnWedding() != null && expectedPerson.getOwnWedding().equals(w))
+                || expectedPerson.getWeddingJobs().contains(w));
+
         expectedModel.setPerson(personToAssign, expectedPerson);
 
         CommandResult result = assignCommand.execute(model);
@@ -206,6 +212,11 @@ public class AssignCommandTest {
         expectedPerson.setWeddingJobs(Set.of(amyWeddingCopy, elleWeddingCopy));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        expectedModel.updateFilteredPersonList(p -> p.equals(expectedPerson));
+        expectedModel.updateFilteredWeddingList(w -> (
+                expectedPerson.getOwnWedding() != null && expectedPerson.getOwnWedding().equals(w))
+                || expectedPerson.getWeddingJobs().contains(w));
         expectedModel.setPerson(personToAssign, expectedPerson);
 
         CommandResult result = assignCommand.execute(model);
@@ -327,6 +338,11 @@ public class AssignCommandTest {
         expectedPerson.setWeddingJobs(Set.of(assignedWedding));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        expectedModel.updateFilteredPersonList(p -> p.equals(expectedPerson));
+        expectedModel.updateFilteredWeddingList(w -> (
+                expectedPerson.getOwnWedding() != null && expectedPerson.getOwnWedding().equals(w))
+                || expectedPerson.getWeddingJobs().contains(w));
         expectedModel.setPerson(personToAssign, expectedPerson);
 
         CommandResult result = assignCommand.execute(model);

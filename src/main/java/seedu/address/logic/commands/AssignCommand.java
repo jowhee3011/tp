@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_WEDDINGS;
 
 import java.util.HashSet;
 import java.util.List;
@@ -117,12 +116,12 @@ public class AssignCommand extends Command {
             generateWeddingJobs(model);
             assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
             model.setPerson(personToAssign, assignedPerson);
-            Predicate<Person> PREDICATE_PERSON_ONLY = p -> p.equals(assignedPerson);
-            Predicate<Wedding> PREDICATE_PERSON_WEDDINGS = w ->
-                    (assignedPerson.getOwnWedding() != null && assignedPerson.getOwnWedding().equals(w))
+            Predicate<Person> personOnlyPredicate = p -> p.equals(assignedPerson);
+            Predicate<Wedding> personWeddingsPredicate = w -> (
+                    assignedPerson.getOwnWedding() != null && assignedPerson.getOwnWedding().equals(w))
                             || assignedPerson.getWeddingJobs().contains(w);
-            model.updateFilteredPersonList(PREDICATE_PERSON_ONLY);
-            model.updateFilteredWeddingList(PREDICATE_PERSON_WEDDINGS);
+            model.updateFilteredPersonList(personOnlyPredicate);
+            model.updateFilteredWeddingList(personWeddingsPredicate);
             return new CommandResult(String.format(
                     MESSAGE_ASSIGN_PERSON_TO_WEDDING_SUCCESS,
                     Messages.format(assignedPerson),
