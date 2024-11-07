@@ -17,6 +17,8 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE_WEDDING;
 import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE_WEDDING;
+import static seedu.address.testutil.TypicalPersons.JOHN;
 import static seedu.address.testutil.TypicalPersons.getAdditionalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -181,6 +183,9 @@ public class DeleteCommandTest {
         Wedding elleWeddingCopy = new WeddingBuilder(ELLE_WEDDING).build();
         elleWeddingCopy.setClient(new PersonBuilder(FIONA).build());
         model.addWedding(elleWeddingCopy);
+        Wedding georgeWeddingCopy = new WeddingBuilder(GEORGE_WEDDING).build();
+        georgeWeddingCopy.setClient(new PersonBuilder(JOHN).build());
+        model.addWedding(georgeWeddingCopy);
 
         personToDelete.addWeddingJob(amyWeddingCopy);
         personToDelete.addWeddingJob(elleWeddingCopy);

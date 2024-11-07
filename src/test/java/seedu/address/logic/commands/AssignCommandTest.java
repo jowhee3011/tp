@@ -11,6 +11,8 @@ import static seedu.address.testutil.TypicalPersons.AMY_WEDDING;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.ELLE_WEDDING;
 import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE_WEDDING;
+import static seedu.address.testutil.TypicalPersons.JOHN;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Collections;
@@ -153,6 +155,9 @@ public class AssignCommandTest {
         Wedding amyWeddingCopy = new WeddingBuilder(AMY_WEDDING).build();
         amyWeddingCopy.setClient(new PersonBuilder(BENSON).build());
         model.addWedding(amyWeddingCopy);
+        Wedding georgeWeddingCopy = new WeddingBuilder(GEORGE_WEDDING).build();
+        georgeWeddingCopy.setClient(new PersonBuilder(JOHN).build());
+        model.addWedding(georgeWeddingCopy);
 
         Index indexFirstPerson = INDEX_FIRST_PERSON;
 
