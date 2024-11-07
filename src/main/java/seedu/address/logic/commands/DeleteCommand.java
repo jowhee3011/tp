@@ -92,8 +92,10 @@ public class DeleteCommand extends Command {
             checkPersonIsAssignedWeddings(personToDelete, model);
             // delete those weddings
             removeWeddingJobs(personToDelete, model);
+
             model.updateFilteredPersonList(personOnlyPredicate);
             model.updateFilteredWeddingList(personWeddingsPredicate);
+
             return new CommandResult(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
                     Messages.format(personToDelete)));
         } else {
@@ -143,11 +145,8 @@ public class DeleteCommand extends Command {
      * @throws CommandException if the person is a client in a wedding
      */
     private void validatePersonIsNotClient(Person person, Model model) throws CommandException {
-        List<Wedding> weddings = model.getFilteredWeddingList();
-        for (Wedding wedding : weddings) {
-            if (wedding.getClient() != null && wedding.getClient().getPerson().equals(person)) {
-                throw new CommandException(MESSAGE_PERSON_IS_CLIENT);
-            }
+        if (person.getOwnWedding() != null) {
+            throw new CommandException(MESSAGE_PERSON_IS_CLIENT);
         }
     }
 
@@ -198,8 +197,8 @@ public class DeleteCommand extends Command {
      */
     public void removeWeddingJobs(Person personToDelete, Model model) {
         List<Wedding> weddingList = model.getFilteredWeddingList();
-        for (Wedding wedding : weddingList) {
-            personToDelete.removeWeddingJob(wedding);
+        for (Index index : weddingIndices) {
+            personToDelete.removeWeddingJob(weddingList.get(index.getZeroBased()));
         }
     }
 
