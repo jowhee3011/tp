@@ -12,15 +12,12 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.ALICE_WEDDING;
 import static seedu.address.testutil.TypicalPersons.AMY_WEDDING;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE_WEDDING;
 import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.GEORGE_WEDDING;
-import static seedu.address.testutil.TypicalPersons.JOHN;
 import static seedu.address.testutil.TypicalPersons.getAdditionalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
