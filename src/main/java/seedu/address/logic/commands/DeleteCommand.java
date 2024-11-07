@@ -5,6 +5,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -81,11 +82,19 @@ public class DeleteCommand extends Command {
         }
 
         if (isDeleteWedding) {
+            Predicate<Person> PREDICATE_PERSON_ONLY = p -> p.equals(personToDelete);
+            Predicate<Wedding> PREDICATE_PERSON_WEDDINGS = w ->
+                    (personToDelete.getOwnWedding() != null && personToDelete.getOwnWedding().equals(w))
+                            || personToDelete.getWeddingJobs().contains(w);
+
             checkValidWeddingIndices(model);
             // check if person was assigned to those weddings
             checkPersonIsAssignedWeddings(personToDelete, model);
             // delete those weddings
             removeWeddingJobs(personToDelete, model);
+//            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredPersonList(PREDICATE_PERSON_ONLY);
+            model.updateFilteredWeddingList(PREDICATE_PERSON_WEDDINGS);
             return new CommandResult(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
                     Messages.format(personToDelete)));
         } else {

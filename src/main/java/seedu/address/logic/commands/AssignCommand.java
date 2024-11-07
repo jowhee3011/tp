@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -116,8 +117,12 @@ public class AssignCommand extends Command {
             generateWeddingJobs(model);
             assignedPerson = createPersonWithRole(personToAssign, personWithRoleDescriptor);
             model.setPerson(personToAssign, assignedPerson);
-            model.updateFilteredWeddingList(PREDICATE_SHOW_ALL_WEDDINGS);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            Predicate<Person> PREDICATE_PERSON_ONLY = p -> p.equals(assignedPerson);
+            Predicate<Wedding> PREDICATE_PERSON_WEDDINGS = w ->
+                    (assignedPerson.getOwnWedding() != null && assignedPerson.getOwnWedding().equals(w))
+                            || assignedPerson.getWeddingJobs().contains(w);
+            model.updateFilteredPersonList(PREDICATE_PERSON_ONLY);
+            model.updateFilteredWeddingList(PREDICATE_PERSON_WEDDINGS);
             return new CommandResult(String.format(
                     MESSAGE_ASSIGN_PERSON_TO_WEDDING_SUCCESS,
                     Messages.format(assignedPerson),
