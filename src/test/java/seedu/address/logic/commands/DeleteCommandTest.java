@@ -12,6 +12,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICE_WEDDING;
 import static seedu.address.testutil.TypicalPersons.AMY_WEDDING;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
@@ -183,9 +185,9 @@ public class DeleteCommandTest {
         Wedding elleWeddingCopy = new WeddingBuilder(ELLE_WEDDING).build();
         elleWeddingCopy.setClient(new PersonBuilder(FIONA).build());
         model.addWedding(elleWeddingCopy);
-        Wedding georgeWeddingCopy = new WeddingBuilder(GEORGE_WEDDING).build();
-        georgeWeddingCopy.setClient(new PersonBuilder(JOHN).build());
-        model.addWedding(georgeWeddingCopy);
+        Wedding aliceWeddingCopy = new WeddingBuilder(ALICE_WEDDING).build();
+        aliceWeddingCopy.setClient(new PersonBuilder(personToDelete).build());
+        model.addWedding(aliceWeddingCopy);
 
         personToDelete.addWeddingJob(amyWeddingCopy);
         personToDelete.addWeddingJob(elleWeddingCopy);
