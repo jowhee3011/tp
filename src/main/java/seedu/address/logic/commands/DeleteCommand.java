@@ -96,6 +96,7 @@ public class DeleteCommand extends Command {
             model.updateFilteredPersonList(personOnlyPredicate);
             model.updateFilteredWeddingList(personWeddingsPredicate);
 
+
             return new CommandResult(String.format(MESSAGE_REMOVE_WEDDING_JOBS_SUCCESS,
                     Messages.format(personToDelete)));
         } else {
